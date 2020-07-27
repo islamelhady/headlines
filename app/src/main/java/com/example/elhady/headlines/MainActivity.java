@@ -7,76 +7,70 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import com.example.elhady.headlines.api.ApiClient;
-import com.example.elhady.headlines.api.ApiInterface;
-import com.example.elhady.headlines.models.Article;
-import com.example.elhady.headlines.models.News;
+import com.example.elhady.headlines.Adapter.ListSourceAdapter;
+import com.example.elhady.headlines.Common.Common;
+import com.example.elhady.headlines.Interface.NewsService;
+import com.example.elhady.headlines.model.Article;
+import com.example.elhady.headlines.model.WebSite;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static final String API_KEY = "e4befc80710444afa7f93f67a5790d57";
-    private RecyclerView recyclerView;
+    private RecyclerView listWebsite;
     private RecyclerView.LayoutManager layoutManager;
     private List<Article> articles = new ArrayList<>();
-    private Adapter adapter;
-    private String TAG = MainActivity.class.getSimpleName();
+    private NewsService newsService;
+    private ListSourceAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        layoutManager = new LinearLayoutManager(MainActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setNestedScrollingEnabled(false);
 
-        LoadJson();
+        listWebsite = findViewById(R.id.recyclerView);
+        layoutManager = new LinearLayoutManager(MainActivity.this);
+        listWebsite.setLayoutManager(layoutManager);
+        listWebsite.setItemAnimator(new DefaultItemAnimator());
+        listWebsite.setNestedScrollingEnabled(false);
+
+
+        loadWebSiteSource();
+
     }
 
-    public void LoadJson(){
-
-        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
-        String country = Utils.getCountry();
-
-        Call<News> call;
-        call= apiInterface.getNews(country,API_KEY);
-
-        call.enqueue(new Callback<News>() {
+    public void loadWebSiteSource() {
+        newsService = Common.getNewsService();
+        newsService.getSources("eg", Common.API).enqueue(new Callback<WebSite>() {
             @Override
-            public void onResponse(Call<News> call, Response<News> response) {
+            public void onResponse(Call<WebSite> call, Response<WebSite> response) {
+                if (response.isSuccessful() && response.body().getArticles() != null) {
 
-                if (response.isSuccessful() && response.body().getArticle() != null){
-
-                    if (!articles.isEmpty()){
+                    if (!articles.isEmpty()) {
                         articles.clear();
                     }
-
-                    articles = response.body().getArticle();
-                    adapter = new Adapter(articles, MainActivity.this);
-                    recyclerView.setAdapter(adapter);
+                    articles = response.body().getArticles();
+                    adapter = new ListSourceAdapter(MainActivity.this, articles);
+                    listWebsite.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-
-                }else {
-                    Toast.makeText(MainActivity.this, "No Result!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<News> call, Throwable t) {
+            public void onFailure(Call<WebSite> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "No result", Toast.LENGTH_SHORT).show();
+
 
             }
         });
-
-
     }
+
+
 }
