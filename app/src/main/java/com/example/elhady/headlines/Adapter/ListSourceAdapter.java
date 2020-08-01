@@ -2,6 +2,7 @@ package com.example.elhady.headlines.Adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.elhady.headlines.Interface.ItemClickListener;
+import com.example.elhady.headlines.NewsDetailActivity;
 import com.example.elhady.headlines.R;
 import com.example.elhady.headlines.model.Article;
 
@@ -22,7 +24,7 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
     ItemClickListener itemClickListener;
 
-    TextView source_title,source_name,source_publishAt;
+    TextView source_title, source_name, source_publishAt, source_time;
     TextView source_desc;
     ImageView source_img;
     TextView source_author;
@@ -78,6 +80,24 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
         holder.source_author.setText(articles.get(position).getAuthor());
         holder.source_name.setText(articles.get(position).getSource().getName());
         holder.source_publishAt.setText(articles.get(position).getPublishedAt());
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClicked) {
+
+                Intent intent = new Intent(context, NewsDetailActivity.class);
+
+                intent.putExtra("url", articles.get(position).getUrl());
+                intent.putExtra("title", articles.get(position).getTitle());
+                intent.putExtra("img", articles.get(position).getUrlToImage());
+                intent.putExtra("source", articles.get(position).getSource().getName());
+                intent.putExtra("author", articles.get(position).getAuthor());
+
+                context.startActivity(intent);
+
+
+            }
+        });
 
     }
 
