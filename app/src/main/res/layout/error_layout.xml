@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:paddingRight="16dp"
     android:paddingLeft="16dp"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBackground"
     android:id="@+id/error_layout"
     android:visibility="visible">
 
     <ImageView
         android:id="@+id/error_image"
-        android:src="@drawable/ic_signal"
+        android:src="@drawable/signal"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
@@ -19,8 +19,8 @@
 
     <TextView
         android:id="@+id/error_title"
-        android:text="Error Title"
-        android:textColor="@color/cardview_light_background"
+        android:text="Oops..."
+        android:textColor="@color/colorTextSubtitle"
         android:textStyle="bold"
         android:fontFamily="sans-serif-light"
         android:gravity="center_horizontal"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/error_message"
-        android:text="Error Message"
+        android:text="Network failure Please Try Again!"
         android:textColor="@color/colorTextSubtitle"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/error_title"
@@ -44,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Retry"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="#fff"
+        android:backgroundTint="#64B5F6"
+        android:textColor="@color/colorBackground"
         android:layout_below="@id/error_message"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"/>
