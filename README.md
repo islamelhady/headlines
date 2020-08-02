@@ -20,3 +20,5 @@ It uses Retrofit 2 to fetch news sources and news headlines from the API and dis
 * [Glide](https://github.com/bumptech/glide) - for load image frojm INTERNET
 * Recycler View
 * Recycler View OnClick
+* CardView
+* Intent
