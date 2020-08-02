@@ -115,7 +115,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
         holder.source_desc.setText(articles.get(position).getDescription());
         holder.source_author.setText(articles.get(position).getAuthor());
         holder.source_name.setText(articles.get(position).getSource().getName());
-        holder.source_publishAt.setText(articles.get(position).getPublishedAt());
+        holder.source_publishAt.setText(Utils.DateFormat(articles.get(position).getPublishedAt()));
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
