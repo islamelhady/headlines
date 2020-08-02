@@ -1,7 +1,7 @@
 package com.elhady.headlines.Adapter;
 
-import android.app.MediaRouteButton;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.elhady.headlines.Interface.ItemClickListener;
 import com.elhady.headlines.Models.Article;
+import com.elhady.headlines.NewsDetails;
 import com.elhady.headlines.R;
 import com.elhady.headlines.Utils;
 
@@ -49,7 +50,7 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         source_img = itemView.findViewById(R.id.img);
         progressBar = itemView.findViewById(R.id.prograss_load_photo);
 
-        //itemView.setOnClickListener(this);
+        itemView.setOnClickListener(this);
     }
 
 
@@ -59,6 +60,7 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        itemClickListener.onClick(v,getAdapterPosition(),false);
 
     }
 }
@@ -114,6 +116,24 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
         holder.source_author.setText(articles.get(position).getAuthor());
         holder.source_name.setText(articles.get(position).getSource().getName());
         holder.source_publishAt.setText(articles.get(position).getPublishedAt());
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClicked) {
+
+                Intent intent = new Intent(context,NewsDetails.class);
+
+                intent.putExtra("url",articles.get(position).getUrl());
+                intent.putExtra("title",articles.get(position).getTitle());
+                intent.putExtra("img",articles.get(position).getUrlToImage());
+                intent.putExtra("date",articles.get(position).getPublishedAt());
+                intent.putExtra("source",articles.get(position).getSource().getName());
+                intent.putExtra("author",articles.get(position).getAuthor());
+
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
