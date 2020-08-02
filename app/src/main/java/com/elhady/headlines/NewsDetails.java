@@ -78,6 +78,7 @@ public class NewsDetails extends AppCompatActivity implements AppBarLayout.OnOff
         title.setText(mTitle);
         //date.setText(mDate);
         date.setText(Utils.DateFormat(mDate));
+        time.setText(Utils.DateToTimeFormat(mDate));
 
         initWebView(mUrl);
 

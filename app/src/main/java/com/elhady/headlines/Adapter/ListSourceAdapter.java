@@ -49,6 +49,7 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         source_publishAt = itemView.findViewById(R.id.publishedAt);
         source_img = itemView.findViewById(R.id.img);
         progressBar = itemView.findViewById(R.id.prograss_load_photo);
+        source_time = itemView.findViewById(R.id.time);
 
         itemView.setOnClickListener(this);
     }
@@ -116,6 +117,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
         holder.source_author.setText(articles.get(position).getAuthor());
         holder.source_name.setText(articles.get(position).getSource().getName());
         holder.source_publishAt.setText(Utils.DateFormat(articles.get(position).getPublishedAt()));
+        holder.source_time.setText(Utils.DateToTimeFormat(articles.get(position).getPublishedAt()));
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override

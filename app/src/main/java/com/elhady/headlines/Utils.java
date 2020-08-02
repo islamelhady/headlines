@@ -29,7 +29,7 @@ public class Utils {
         int idx = new Random().nextInt(vibrantLightColorList.length);
         return vibrantLightColorList[idx];
     }
-
+    //edit format Date
     public static String DateFormat(String oldstringDate) {
 
         String newDate;
@@ -44,5 +44,21 @@ public class Utils {
         }
 
         return newDate;
+    }
+
+    // edit format Time
+    public static String DateToTimeFormat(String oldstringDate){
+        PrettyTime p = new PrettyTime();
+        String isTime = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
+                    Locale.ENGLISH);
+            Date date = sdf.parse(oldstringDate);
+            isTime = p.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return isTime;
     }
 }
