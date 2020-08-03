@@ -21,4 +21,3 @@ It uses Retrofit 2 to fetch news sources and news headlines from the API and dis
 * Recycler View
 * Recycler View OnClick
 * CardView
-* Intent
