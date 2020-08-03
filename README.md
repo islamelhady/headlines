@@ -17,7 +17,12 @@ It uses Retrofit 2 to fetch news sources and news headlines from the API and dis
 ## Components Used
 
 * [Retrofit](https://square.github.io/retrofit/) - for fetch data
-* [Glide](https://github.com/bumptech/glide) - for load image frojm INTERNET
+* [Glide](https://github.com/bumptech/glide) - for load image from INTERNET
 * Recycler View
 * Recycler View OnClick
 * CardView
+* Material design
+* Prettytime for Convert Java Date() objects in just “a few minutes!”
+
+## Screen Shot
+![Screenshot-HeadlinesNewsApp](https://user-images.githubusercontent.com/30935046/89234778-0240fb80-d5ed-11ea-8bd2-920028aab878.png)
