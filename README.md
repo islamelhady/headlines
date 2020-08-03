@@ -1,7 +1,7 @@
 
 # Headlines News App
 
-A Sample News App written in Kotlin
+A Sample News App written in Java code
 
 ## About App
 
