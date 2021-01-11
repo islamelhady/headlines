@@ -1,6 +1,9 @@
 
 # Headlines News App
 
+![Screenshot-HeadlinesNewsApp](screen.png)
+
+
 A Sample News App written in Java code
 
 ## About App
@@ -23,6 +26,3 @@ It uses Retrofit 2 to fetch news sources and news headlines from the API and dis
 * CardView
 * Material design
 * Prettytime for Convert Java Date() objects in just “a few minutes!”
-
-## Screen Shot
-![Screenshot-HeadlinesNewsApp](https://user-images.githubusercontent.com/30935046/89234778-0240fb80-d5ed-11ea-8bd2-920028aab878.png)
